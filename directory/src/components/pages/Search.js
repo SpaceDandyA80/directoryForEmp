@@ -9,8 +9,8 @@ import API from "../../utils/API";
 
 function Search() {
   const [articleState, setArticleState] = useState({
-    title: "",
-    url: ""
+    first: "",
+    email: ""
   })
 
   const [search, setSearch] = useState("");
@@ -18,12 +18,11 @@ function Search() {
 
   useEffect(() => {
     document.title = "Employee Search";
-    if(!search){
-      return;
-    }
-    API.searchIndex(search)
+ 
+    API.searchIndex()
     .then(res => {
-      if (res.results.length === 0){
+     // console.log(res.data.results)
+      if (res.data.results.length === 0){
         throw new Error("no results found.");
       }
       if (res.results.status === "error"){
@@ -31,12 +30,12 @@ function Search() {
   
       }
       setArticleState({
-        title: res.results[0].name.first,
-        url: res.results[1][0],
+        first: res.results.name.first,
+        email: res.results.email,
       })
     })
     .catch(err => setError(err));
-  }, [search]);
+  });
 
 
   const handleInputChange = event => {
@@ -52,7 +51,7 @@ function Search() {
     <div>
       <h1>Employee Search</h1>
       <div>
-        <Alert type="text-center">
+        <Alert type="danger" style={{ opacity: error ? 1 : 0, marginBottom: 10 }}>
           {error}
         </Alert>
         <SearchForm

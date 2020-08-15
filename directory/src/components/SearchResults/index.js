@@ -3,12 +3,12 @@ import SearchContext from '../../utils/SearchContext';
 
 
 function SearchResults() {
-    const search = useContext(SearchContext);
+    const employee = useContext(SearchContext);
     return(
         <ul className="list-group search-results">
         <li className="list-group-item">
-          <h2>{search.title}</h2>
-          <a href={search.url}>{search.url}</a>
+          <h2>{employee.first}</h2>
+          <h2>{employee.url}</h2>
         </li>
       </ul>
     )
