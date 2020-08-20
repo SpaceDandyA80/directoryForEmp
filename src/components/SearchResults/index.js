@@ -1,18 +1,17 @@
-import React, {useContext} from 'react';
-import SearchContext from '../../utils/SearchContext';
-
+import React, { useContext } from "react";
+import SearchContext from "../../utils/SearchContext";
 
 function SearchResults() {
-    const employee = useContext(SearchContext);
-    return(
-  <div >
-    <input className="form-control"
-    type="search"
-    aria-label="Search"
-    onChange={e => employee.handleInputChange(e)}
-    />
-  </div>
-    )
+  const employee = useContext(SearchContext);
+  console.log(employee);
+  return employee.articleState.map(({ name, email, id }) => {
+    return (
+      <div key={id}>
+        <li>{name}</li>
+        <li>{email}</li>
+      </div>
+    );
+  });
 }
 
 export default SearchResults;

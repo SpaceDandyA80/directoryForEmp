@@ -12,15 +12,18 @@ function Search() {
   //const [error, setError] = useState("");
 
   useEffect(() => {
-    document.title = "Employee Search";
+    loadUsers();
+  }, [articleState]);
 
+  function loadUsers() {
     API.searchIndex()
-      .then((res) =>
-        // console.log(res.data.results)
-        setArticleState(res.data.results)
-      )
+      .then((res) => {
+        console.log(res.data.results);
+        setArticleState(res.data.results);
+      })
+
       .catch((err) => console.log(err));
-  });
+  }
 
   const handleInputChange = (event) => {
     setSearch(event.target.value);
@@ -31,7 +34,7 @@ function Search() {
   };
 
   return (
-    <SearchContext.Provider value={articleState}>
+    <SearchContext.Provider value={{ articleState }}>
       <div>
         <h1>Employee Search</h1>
         <div>
