@@ -3,12 +3,12 @@ import SearchContext from "../../utils/SearchContext";
 
 function SearchResults() {
   const employee = useContext(SearchContext);
-  console.log(employee);
-  return employee.articleState.map(({ name, email, id }) => {
+
+  return employee.articleState.map((employees) => {
     return (
-      <div key={id}>
-        <li>{name}</li>
-        <li>{email}</li>
+      <div key={employees.id.value}>
+        <li>{employees.name.first} {employees.name.last}</li>
+        <li>{employees.email}</li>
       </div>
     );
   });

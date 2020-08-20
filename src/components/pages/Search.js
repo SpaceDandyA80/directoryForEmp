@@ -13,7 +13,7 @@ function Search() {
 
   useEffect(() => {
     loadUsers();
-  }, [articleState]);
+  }, []);
 
   function loadUsers() {
     API.searchIndex()
